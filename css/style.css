@@ -550,9 +550,7 @@ html {
     margin-left: 3%;
     font-size: 1.5rem;
 }
-.cart--firstname{
-    margin-top: 45%;
-}
+
 .cart--removediscountbutton{
     font-size: 1.5rem;
     margin-left: 3%;
@@ -686,7 +684,6 @@ html {
     border-radius: 1rem;
     padding: 1rem;
     font-size: 1.5rem;
-
 }
 .cart--noitems{
     margin-top: 10rem;
@@ -695,6 +692,69 @@ html {
 }
 .cart--tabels {
     display: flex;
+}
+
+.register--container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 1rem;
+    background-color: #c6c6c6d4;
+    border-radius: 0.5rem;
+    width: 50%;
+
+}
+.register--outer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.register--firstname,
+.register--lastname,
+.register--email,
+.register--password,
+.register--street,
+.register--zipcode,
+.register--city{
+    font-size: 2rem;
+    margin-top: 3rem;
+}
+
+.register--city--input{
+    margin-bottom: 2rem;
+}
+.register--firstname--input,
+.register--lastname--input,
+.register--email--input,
+.register--password--input,
+.register--street--input,
+.register--zipcode--input,
+.register--city--input{
+    font-size: 2rem;    
+    border: none;
+    border-radius: 0.5rem;
+}
+
+.register--noaccount{
+    text-decoration: none;
+    font-size: 1.5rem;
+    color: black;
+}
+.register--confirm{
+    margin-top: 0.5rem;
+    background-color: white;
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+}
+
+.order--confirmed{
+    text-align: center;
+    margin-top: 5rem;
+    font-size: 2rem;
 }
 
 .footer--container {
@@ -722,7 +782,6 @@ html {
 #image3 {
     display: none;
     animation-duration: 2s;
-    /* Duration of the fade animation (1 second in this case) */
     animation-timing-function: ease-in-out;
 }
 

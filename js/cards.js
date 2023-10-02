@@ -22,4 +22,4 @@ function toggleCardsVisibility() {
   
   
   window.addEventListener('load', toggleCardsVisibility);
-  window.addEventListener('resize', toggleCardsVisibility);
+window.addEventListener('resize', toggleCardsVisibility);

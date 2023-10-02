@@ -32,6 +32,10 @@ if (isset($_GET['type'])) {
     {
         RemoveDiscount();
     }
+    elseif($type == "LoggedIn")
+    {
+        LoggedIn();
+    }
 }
 
 function AddToCart($product_ID)
@@ -42,21 +46,6 @@ function AddToCart($product_ID)
     echo "Toegevoegd aan winkelwagen!";
 }
 
-function GetProductByID($product_ID, $mysqli){
-    $query = "SELECT * FROM products WHERE product_ID = ?";
-    $stmt = $mysqli->prepare($query);
-    $stmt->bind_param("i", $product_ID);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        $product = $result->fetch_assoc();
-        $stmt->close();
-        return $product;
-    } else {
-        $stmt->close();
-        return null; 
-    }
-}
 
 function UpdateCart($product_ID, $newAmount){
     if (isset($_SESSION['cart'])) {
@@ -117,4 +106,9 @@ function RemoveDiscount(){
     echo "removed";
 }
 
+function LoggedIn(){
+    if(isset($_SESSION['email'])){
+        echo "active";
+    }
+}
 ?>

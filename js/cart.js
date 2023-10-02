@@ -29,6 +29,16 @@ function UpdateCart(productID, newAmount){
         }
     }
     else{
+        if(newAmount > 10){
+            $.ajax({
+                url: 'controllers/cart_controller.php',
+                type: 'GET',
+                data: { type: 'UpdateCart', product_ID: productID, newAmount: 10},
+                success: function (result) {
+                    window.location.reload()
+                }
+            }); 
+        }else{
         $.ajax({
             url: 'controllers/cart_controller.php',
             type: 'GET',
@@ -37,6 +47,7 @@ function UpdateCart(productID, newAmount){
                 window.location.reload()
             }
         }); 
+    }
     }
     
 }
@@ -85,3 +96,29 @@ function RemoveDiscount(){
         }
     });
 }
+
+function ProcessOrder(){
+    console.log(document.getElementById('shippingSelect').value)
+    if(document.getElementById('shippingSelect').value == "fast"){
+        fastshipping = true;
+    }
+    else if(document.getElementById('shippingSelect').value == "standaard"){
+        fastshipping = false;
+    }
+    $.ajax({
+        url: 'controllers/cart_controller.php',
+        type: 'GET',
+        data: { type: 'LoggedIn'},
+        success: function (result) {
+            if(result == "active"){
+                location.href = "../controllers/order_controller.php?type=Checkout&fastshipping="+fastshipping;
+                }
+            else
+            {
+                location.href = "../login.php";
+
+            }
+        }
+    });
+}
+

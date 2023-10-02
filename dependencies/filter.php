@@ -53,6 +53,6 @@ function customFilter($data, $minLength, $maxLength, $dataType, $spacing, $speci
     return $data;
 }
 
-echo customFilter("RANDOM", 1, 10, "str", false, false, true);
+
 
 ?>

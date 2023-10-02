@@ -2,6 +2,7 @@
 
 include('db.php');
 include('controllers/cart_controller.php');
+include("dependencies/functions.php");
 session_start();
 $cart = $_SESSION['cart'];
 $discount = $_SESSION['discount']
@@ -27,7 +28,7 @@ $discount = $_SESSION['discount']
 
 </head>
 <body>
-  <nav class="nav--container">
+<nav class="nav--container">
     <h1 class="nav--bigtext">TT Gadgets</h1>
     <div class="nav--list">
         <a href="index.php" class="nav--item">Home</a>
@@ -37,7 +38,16 @@ $discount = $_SESSION['discount']
     </div>
     <div class="nav--list2">
         <a href="cart.php" class="nav--item">Winkelwagen</a>
-        <a href="dashboard.php" class="nav--item">Account</a>
+        <?php 
+        if(isset($_SESSION['email'])){ ?>
+          <a href="ordered.php" class="nav--item">Bestellingen</a>
+          <a href="controllers/account_controller.php?type=logout" class="nav--item">Uitloggen</a>
+        <?php
+        }
+        else
+        { ?>
+          <a href="login.php" class="nav--item">Login</a>
+        <?php }?>
     </div>
 
     <div class="nav--mobile">
@@ -57,7 +67,17 @@ $discount = $_SESSION['discount']
   <a href="about.php" class="nav--mobile--item">Over ons</a>
   <a href="contact.php" class="nav--mobile--item">Contact</a>
   <a href="cart.php" class="nav--mobile--item">Winkelwagen</a>
-  <a href="dashboard.php" class="nav--mobile--item">Account</a>
+
+  <?php 
+        if(isset($_SESSION['email'])){ ?>
+          <a href="ordered.php" class="nav--mobile--item">Bestellingen</a>
+          <a href="controllers/account_controller.php?type=logout" class="nav--mobile--item">Uitloggen</a>
+        <?php
+        }
+        else
+        { ?>
+      <a href="login.php" class="nav--mobile--item">Login</a>
+        <?php }?>
 </div>
 <div id="cart-popup" class="popup">
   Item added to cart!
@@ -91,7 +111,7 @@ foreach ($cartQuantities as $productid => $quantity) {
     <div class="cart--item">
         <img id="cart--image" src="img/<?php echo $product1['image']?>" alt="product image">
         <p class="cart--productnaam"><?php echo $product1['name'] ?></p>
-        <input onchange="(UpdateCart(<?php echo $product1['product_ID']?>, this.value))" placeholder="<?php echo $quantity; ?>" value="<?php echo $quantity; ?>" type="number" id="cart--aantalkiezen" name="points" step="1">
+        <input  onchange="(UpdateCart(<?php echo $product1['product_ID']?>, this.value))" maxlength="10" value="<?php echo $quantity; ?>" type="number" id="cart--aantalkiezen" name="points" step="1">
         <p class="cart--productprijs">€<?php echo $productPrice ?></p>
     </div>
     <?php
@@ -107,19 +127,6 @@ foreach ($cartQuantities as $productid => $quantity) {
     <h1 class="cart--korting">Kortingscode</h1>
     <input type="text" name="korting" id="" class="cart--kortinginput">
     <button type="submit" onclick="ApplyCoupon()" class="cart--kortingbutton">Toepassen</button>
-    <form action="controllers/order_controller.php?type=checkout" method="post">
-    <p class="cart--firstname">Voornaam:</p>
-    <input required type="text" name="firstname" id="">
-    <p>Achternaam:</p>
-    <input required type="text" name="lastname" id="">
-    <p>Email:</p>
-    <input required type="email" name="email" id="">
-    <p>Straat + Huisnummer:</p>
-    <input required type="text" name="streetandnumber" id="">
-    <p>Postcode:</p>
-    <input required type="text" name="zipcode" id="">
-    <p>Stad:</p>
-    <input required type="text" name="city" id="">
     
     <p class="cart--discounttext"><?php if(isset($_SESSION['discount'])){echo "€" . number_format($totalPrice, 2);}?></p>
     <button class="cart--removediscountbutton" onclick="RemoveDiscount()"><?php if(isset($_SESSION['discount'])){echo "Korting verwijderen (" . number_format($_SESSION['discount'], 2) . "%)";}?></button>
@@ -127,8 +134,7 @@ foreach ($cartQuantities as $productid => $quantity) {
     $totalPrice = LoadCoupon($totalPrice);
     ?>
     <h1 class="cart--total">Totaal: €<span id="totalPrice"><?php echo number_format($totalPrice, 2); ?></span></h1> 
-    <button type="submit" class="cart--pay">Betalen</button>
-    </form>
+    <button onclick="ProcessOrder()" class="cart--pay">Betalen</button>
 </section>
 </div>
 

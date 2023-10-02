@@ -1,5 +1,6 @@
 <?php
 include("db.php");
+include("../dependencies/functions.php");
 function GetProducts($mysqli)
 {
     $products = array();

@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +32,16 @@
     </div>
     <div class="nav--list2">
         <a href="cart.php" class="nav--item">Winkelwagen</a>
-        <a href="dashboard.php" class="nav--item">Account</a>
+        <?php 
+        if(isset($_SESSION['email'])){ ?>
+          <a href="ordered.php" class="nav--item">Bestellingen</a>
+          <a href="controllers/account_controller.php?type=logout" class="nav--item">Uitloggen</a>
+        <?php
+        }
+        else
+        { ?>
+          <a href="login.php" class="nav--item">Login</a>
+        <?php }?>
     </div>
 
     <div class="nav--mobile">
@@ -47,7 +61,17 @@
   <a href="about.php" class="nav--mobile--item">Over ons</a>
   <a href="contact.php" class="nav--mobile--item">Contact</a>
   <a href="cart.php" class="nav--mobile--item">Winkelwagen</a>
-  <a href="dashboard.php" class="nav--mobile--item">Account</a>
+
+  <?php 
+        if(isset($_SESSION['email'])){ ?>
+          <a href="ordered.php" class="nav--mobile--item">Bestellingen</a>
+          <a href="controllers/account_controller.php?type=logout" class="nav--mobile--item">Uitloggen</a>
+        <?php
+        }
+        else
+        { ?>
+      <a href="login.php" class="nav--mobile--item">Login</a>
+        <?php }?>
 </div>
 <div class="slideshow">
   <div id="image1" class="fade">
