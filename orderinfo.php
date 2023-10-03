@@ -1,5 +1,21 @@
 <?php
+
+
+include('db.php');
+include('controllers/order_controller.php');
+
 session_start();
+$cart = $_SESSION['cart'];
+$discount = $_SESSION['discount'];
+$order_ID = $_GET['order_ID'];
+
+if(IsThisMyOrder($order_ID, $mysqli)[0]['customer_ID'] != $_SESSION['id']){
+    session_destroy();
+    header("Location: login.php");
+}
+
+$orderproducts = GetProductsFromOrderID($order_ID, $mysqli);
+
 ?>
 
 <!DOCTYPE html>
@@ -13,9 +29,10 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="js/main.js"></script>
-    <script src="js/slideshow.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
 
 </head>
 <body>
@@ -70,52 +87,43 @@ session_start();
       <a href="login.php" class="nav--mobile--item">Login</a>
         <?php }?>
 </div>
-<div class="slideshow">
-  <div id="image1" class="fade">
-    <img src="img/background.jpg" class="background2--container" width="100%" alt="background">
-  </div>
-  <div id="image2" class="fade">
-    <img src="img/rD1eOT.jpeg" class="background2--container" width="100%" alt="background">
-  </div>
-  <div id="image3" class="fade">
-    <img src="img/turtle-beach-stealth-pro-preorder-blogroll-1679582803054_vcah.jpeg" class="background2--container" width="100%" alt="background">
-  </div>
+<div id="cart-popup" class="popup">
+  Item added to cart!
 </div>
-    <section class="contact--container">
-      <h1 class="contact--header">Contact</h1>
-      <p class="contact--phonenumber--mobile">Tel: 123456789</p>
-      <p class="contact--email--mobile">Email: voorbeeld@ttgadgets.com</p>
-      <div class="contact--object">
-      <section class="contact--formcontainer">
-        <h1 class="contact--formheader">Contact Formulier</h1>
-        <form action="" class="contact--form">
-          <placeholder for="naam" class="contact--formname">Naam:</placeholder>
-          <input type="text" class="contact--formname" name="naam" id="">
-          <br>
-          <placeholder for="email" class="contact--formemail">Email:</placeholder>
-          <input type="email" class="contact--formemail"name="emal" id="">
-          <br>
-          <placeholder for="description" id="contact--formholderdescription">Beschrijving:</placeholder>
-          <br>
-          <textarea name="description" class="contact--formdescription" cols="30" rows="6"></textarea>
-          <br>
-          <button class="contact--formsubmit" type="submit">Verstuur</button>
-        </form>
-      </section>
-      <section class="contact--infocontainer">
-        <p class="contact--infotext">
-         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus consectetur eaque impedit vel laboriosam ea corporis quibusdam
-        </p>
-        <p class="contact--phonenumber">Tel: 123456789</p>
-        <p class="contact--email">Email: voorbeeld@ttgadgets.com</p>
-      </section>
-    </div>
-    </section>
-  </section>
+        <p class="cart--noitems">OrderID: <?php echo $order_ID?></p>
+<section class="product--products1">
+    <?php
+    $orderQuantities = array_count_values(array_column($orderproducts, 'product_ID')); 
+    if(empty($orderQuantities)){
+        echo '<h1 class="cart--noitems">Empty.</h1>';
+    } else {
+        foreach ($orderQuantities as $productid => $quantity) {
+            // Find the product details using $productid
+            $product = findProductByID($productid, $orderproducts);
+    ?>
+            <div class="product--card1">
+                <img class="product--img" src="img/<?php echo $product['image']?>" />
+                <h1 class="product--header"><?php echo $product['name']?></h1>
+                <p1 class="product--price">Amount: <?php echo $quantity?></p1>
+                <br>
+                <br>
+                <center><p1 style="font-size: 1.3rem;"><?php echo $product['description']?></p1></center>
+            </div>
+    <?php
+        }
+    }
+    ?>
+</section>
+
+ 
     <footer class="footer--container">
         <p class="footer--text">Contact</p>
         <p class="footer--text">FAQ</p>
         <p class="footer--text">TOS</p>
     </footer>
 </body>
+<script>
+
+
+</script>
 </html>

@@ -454,6 +454,44 @@ html {
     height: 18rem;
 }
 
+.ordered--item {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+    border-radius: 1rem;
+    background-color: rgb(237, 237, 237);
+    width: 70%;
+    height: 15rem;
+}
+
+.orderedinfo--item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+    margin-left: 9rem;
+    border-radius: 1rem;
+    background-color: rgb(237, 237, 237);
+    width: 30%;
+    height: 15rem;
+}
+
+.ordered--naam {
+    font-size: 2rem;
+}
+.ordered--prijs{
+    font-size: 2rem;
+}
+
+.ordered--meerinfo{
+    color: black;
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
 .cart--item--labels {
     display: flex;
     align-items: center;
@@ -546,7 +584,7 @@ html {
 }
 .cart--discounttext{
     text-decoration: line-through;
-    
+    margin-top: 10rem;
     margin-left: 3%;
     font-size: 1.5rem;
 }
@@ -757,6 +795,22 @@ html {
     font-size: 2rem;
 }
 
+.ordered--history{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.orderedinfo--history{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+
 .footer--container {
     position: absolute;
     bottom: 0;
@@ -801,7 +855,7 @@ html {
 
 
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 960px) {
     .nav--list {
         display: none !important;
     }

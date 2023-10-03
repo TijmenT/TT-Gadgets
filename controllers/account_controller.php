@@ -65,7 +65,7 @@ function Login($mysqli){
             $result = $stmt->get_result();
             $data = $result->fetch_assoc();
             if(password_verify($password, $data['password'])){
-                $_SESSION['email'] = $email;
+                $_SESSION['id'] = $data['customer_ID'];
                 header("Location: ../index.php");
             }
             else{

@@ -39,7 +39,7 @@ $discount = $_SESSION['discount']
     <div class="nav--list2">
         <a href="cart.php" class="nav--item">Winkelwagen</a>
         <?php 
-        if(isset($_SESSION['email'])){ ?>
+        if(isset($_SESSION['id'])){ ?>
           <a href="ordered.php" class="nav--item">Bestellingen</a>
           <a href="controllers/account_controller.php?type=logout" class="nav--item">Uitloggen</a>
         <?php
@@ -69,7 +69,7 @@ $discount = $_SESSION['discount']
   <a href="cart.php" class="nav--mobile--item">Winkelwagen</a>
 
   <?php 
-        if(isset($_SESSION['email'])){ ?>
+        if(isset($_SESSION['id'])){ ?>
           <a href="ordered.php" class="nav--mobile--item">Bestellingen</a>
           <a href="controllers/account_controller.php?type=logout" class="nav--mobile--item">Uitloggen</a>
         <?php
@@ -177,7 +177,7 @@ if($cartQuantities == NULL){
     $totalPricee = LoadCoupon($totalPricee);
     ?>  
       <h1 class="cart--total--mobile">Totaal: €<span id="totalPriceee"><?php echo number_format($totalPricee, 2); ?></span></h1> 
-      <button type=submit class="cart--pay--mobile">Betalen</button>
+      <button onclick="ProcessOrder()" class="cart--pay--mobile">Betalen</button>
       </form>
   </div>
   </div>
