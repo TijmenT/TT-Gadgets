@@ -111,7 +111,7 @@ function ProcessOrder(){
         data: { type: 'LoggedIn'},
         success: function (result) {
             if(result == "active"){
-                location.href = "../controllers/order_controller.php?type=Checkout&fastshipping="+fastshipping;
+                location.href = "controllers/order_controller.php?type=Checkout&fastshipping="+fastshipping;
                 }
             else
             {

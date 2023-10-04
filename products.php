@@ -106,7 +106,7 @@ foreach ($products as $product) {
       <div class="product--card1">
         <img class="product--img" src="img/<?php echo $product['image']?>" />
         <h1 class="product--header"><?php echo $product['name']?></h1>
-        <p1 class="product--price">€<?php echo $product['price'] ?></p1>
+        <p1 class="product--price">€<?php echo number_format($product['price'], 2, ',', '.'); ?></p1>
         <button onclick="AddToCart(<?php echo $product['product_ID']?>)"class="product--buy">In Winkelwagen</button>
       </div>
 <?php

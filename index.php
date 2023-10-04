@@ -27,6 +27,9 @@ session_start();
 
 </head>
 <body>
+<noscript>
+  <p>This site requires JavaScript to function properly. Please enable JavaScript in your browser settings.</p>
+</noscript>
   <nav class="nav--container">
     <h1 class="nav--bigtext">TT Gadgets</h1>
     <div class="nav--list">
@@ -81,8 +84,6 @@ session_start();
 <div id="cart-popup" class="popup">
  .
 </div>
-
-
       <div class="slideshow">
         <div id="image1" class="fade">
           <img src="img/background.jpg" class="background--container" width="100%" alt="background">
@@ -101,7 +102,7 @@ session_start();
       <div class="product--card">
         <img class="product--img" src="img/<?php echo $product['image']?>" />
         <h1 class="product--header"><?php echo $product['name']?></h1>
-        <p1 class="product--price">€<?php echo $product['price'] ?></p1>
+        <p1 class="product--price">€<?php echo number_format($product['price'], 2, ',', '.'); ?></p1>
         <button onclick="AddToCart(<?php echo $product['product_ID']?>)"class="product--buy">In Winkelwagen</button>
       </div>
 <?php

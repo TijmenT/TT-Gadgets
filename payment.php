@@ -87,7 +87,7 @@
 
 
         document.addEventListener("DOMContentLoaded", function () {
-            const paymentForm = document.getElementById("payment-form");
+            const paymentForm = document    .getElementById("payment-form");
             const submitButton = document.getElementById("submit-button");
             const paymentResult = document.getElementById("payment-result");
 

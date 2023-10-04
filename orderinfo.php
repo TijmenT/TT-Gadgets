@@ -91,14 +91,13 @@ $orderproducts = GetProductsFromOrderID($order_ID, $mysqli);
   Item added to cart!
 </div>
         <p class="cart--noitems">OrderID: <?php echo $order_ID?></p>
-<section class="product--products1">
+<section class="product--products2">
     <?php
     $orderQuantities = array_count_values(array_column($orderproducts, 'product_ID')); 
     if(empty($orderQuantities)){
         echo '<h1 class="cart--noitems">Empty.</h1>';
     } else {
         foreach ($orderQuantities as $productid => $quantity) {
-            // Find the product details using $productid
             $product = findProductByID($productid, $orderproducts);
     ?>
             <div class="product--card1">

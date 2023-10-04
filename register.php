@@ -37,7 +37,7 @@ $discount = $_SESSION['discount']
     </div>
     <div class="nav--list2">
         <a href="cart.php" class="nav--item">Winkelwagen</a>
-        <a href="dashboard.php" class="nav--item">Login</a>
+        <a href="login.php" class="nav--item">Login</a>
     </div>
 
     <div class="nav--mobile">
@@ -66,6 +66,8 @@ $discount = $_SESSION['discount']
 <div class="register--outer">
 <section class="register--container">
 <form class="register--form" action="controllers/account_controller.php?type=register" method="post">
+<h2 class="register--header">Registreer</h2>
+
     <p class="register--firstname">Voornaam:</p>
     <input class="register--firstname--input" required type="text" name="firstname" id="">
     <p class="register--lastname">Achternaam:</p>

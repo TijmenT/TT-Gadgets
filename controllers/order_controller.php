@@ -121,7 +121,7 @@ function PaidOrder($order_ID, $mysqli){
 }
 
 function GetProductsFromOrderID($order_ID, $mysqli){
-    $query = "SELECT * FROM products LEFT JOIN ordered_items ON products.product_ID=ordered_items.product_ID WHERE ordered_items.order_ID = ?";
+    $query = "SELECT * FROM products INNER JOIN ordered_items ON products.product_ID=ordered_items.product_ID WHERE ordered_items.order_ID = ?";
     if ($stmt = $mysqli->prepare($query)){
         $stmt->bind_param("i", $order_ID);
         if($stmt->execute()){

@@ -56,11 +56,10 @@ function Registation($mysqli){
 function Login($mysqli){
     $email = customFilter($_POST['email'], 4, 40, "str", false, false, true);
     $password = customFilter($_POST['password'], 4, 40, "str", false, false, true);
-
     $query = "SELECT * FROM `customers` WHERE `email` = ?";
+
     if ($stmt = $mysqli->prepare($query)) {
         $stmt->bind_param("s", $email);
-
         if ($stmt->execute()) {
             $result = $stmt->get_result();
             $data = $result->fetch_assoc();
@@ -69,15 +68,17 @@ function Login($mysqli){
                 header("Location: ../index.php");
             }
             else{
-                echo " wrong pass";
+                header("Location: ../login.php?error=Email and/or password incorrect.");
             }
         } else {
             echo "Error: " . $stmt->error;
+            header("Location: ../login.php?error=unknown");
         }
 
         $stmt->close();
     } else {
         echo "Error: " . $mysqli->error;
+        header("Location: ../login.php?error=unknown");
     }
 }
 

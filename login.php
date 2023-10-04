@@ -4,7 +4,22 @@ include('db.php');
 include('controllers/cart_controller.php');
 session_start();
 $cart = $_SESSION['cart'];
-$discount = $_SESSION['discount']
+$discount = $_SESSION['discount'];
+
+$error = $_GET['error'];
+
+if(isset($_GET['error'])){
+  ?>
+  <script>
+    var popup = document.getElementById("cart-popup");
+                popup.textContent = " Failed to delete discount.";
+                popup.style.display = "block";
+                setTimeout(function () {
+                    popup.style.display = "none";
+                }, 2000);
+  </script>
+<?php
+}
 
 
 ?>
@@ -37,7 +52,7 @@ $discount = $_SESSION['discount']
     </div>
     <div class="nav--list2">
         <a href="cart.php" class="nav--item">Winkelwagen</a>
-        <a href="dashboard.php" class="nav--item">Login</a>
+        <a href="login.php" class="nav--item">Login</a>
     </div>
 
     <div class="nav--mobile">
@@ -66,10 +81,12 @@ $discount = $_SESSION['discount']
 <div class="register--outer">
 <section class="register--container">
 <form class="register--form" action="controllers/account_controller.php?type=login" method="post">
+  <h2 class="register--header">Login</h2>
     <p class="register--email">Email:</p>
     <input class="register--email--input" required type="email" name="email" id="">
     <p class="register--password">Wachtwoord:</p>
     <input class="register--password--input" required type="password" name="password" id="">
+    <br>
     <br>
     <a href="register.php" class="register--noaccount">Nog geen account? Klik hier.</a>
     <br>
@@ -83,6 +100,25 @@ $discount = $_SESSION['discount']
         <p class="footer--text">TOS</p>
     </footer>
 </body>
+<?php
+$error = $_GET['error'];
+
+if(isset($_GET['error'])){
+  ?>
+  <script>
+    var popup = document.getElementById("cart-popup");
+                popup.textContent = "<?php echo $_GET['error']?>";
+                popup.style.display = "block";
+                setTimeout(function () {
+                    popup.style.display = "none";
+                }, 5000);
+  </script>
+<?php
+}
+
+
+?>
+
 <script>
 
 

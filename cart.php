@@ -112,7 +112,7 @@ foreach ($cartQuantities as $productid => $quantity) {
         <img id="cart--image" src="img/<?php echo $product1['image']?>" alt="product image">
         <p class="cart--productnaam"><?php echo $product1['name'] ?></p>
         <input  onchange="(UpdateCart(<?php echo $product1['product_ID']?>, this.value))" maxlength="10" value="<?php echo $quantity; ?>" type="number" id="cart--aantalkiezen" name="points" step="1">
-        <p class="cart--productprijs">€<?php echo $productPrice ?></p>
+        <p class="cart--productprijs">€<?php echo number_format($productPrice, 2, ',', '.'); ?></p>
     </div>
     <?php
 }
@@ -133,7 +133,7 @@ foreach ($cartQuantities as $productid => $quantity) {
     <?php
     $totalPrice = LoadCoupon($totalPrice);
     ?>
-    <h1 class="cart--total">Totaal: €<span id="totalPrice"><?php echo number_format($totalPrice, 2); ?></span></h1> 
+    <h1 class="cart--total">Totaal: €<span id="totalPrice"><?php number_format($totalPrice, 2, ',', '.'); ?></span></h1> 
     <button onclick="ProcessOrder()" class="cart--pay">Betalen</button>
 </section>
 </div>
@@ -154,7 +154,7 @@ if($cartQuantities == NULL){
     <div class="cart--item--mobile">
       <h1 class="cart--productname--mobile"><?php echo $product1['name']?></h1>
       <input onchange="(UpdateCart(<?php echo $product1['product_ID']?>, this.value))" placeholder="<?php echo $quantity; ?>" value="<?php echo $quantity; ?>" type="number" id="cart--aantalkiezen--mobile" name="points" step="1">
-      <p class="cart--productprijs--mobile">€<?php echo $product1['price']?></p>
+      <p class="cart--productprijs--mobile">€<?php echo number_format($product1['price'], 2, ',', '.');?></p>
     </div>
     <?php
     }
@@ -170,15 +170,13 @@ if($cartQuantities == NULL){
       <input type="text" name="korting" id="" class="cart--kortinginput--mobile">
       <br>
       <button type="submit" onclick="ApplyCoupon()" class="cart--kortingbutton--mobile">Toepassen</button>
-      <form action="controller/order_controller.php" method="post">
       <p class="cart--discounttext"><?php if(isset($_SESSION['discount'])){echo "€" . number_format($totalPricee, 2);}?></p>
     <button class="cart--removediscountbutton" onclick="RemoveDiscount()"><?php if(isset($_SESSION['discount'])){echo "Korting verwijderen (" . number_format($_SESSION['discount'], 2) . "%)";}?></button>
     <?php
     $totalPricee = LoadCoupon($totalPricee);
     ?>  
-      <h1 class="cart--total--mobile">Totaal: €<span id="totalPriceee"><?php echo number_format($totalPricee, 2); ?></span></h1> 
+      <h1 class="cart--total--mobile">Totaal: €<span id="totalPriceee"><?php echo number_format($totalPricee, 2, ',', '.'); ?></span></h1> 
       <button onclick="ProcessOrder()" class="cart--pay--mobile">Betalen</button>
-      </form>
   </div>
   </div>
   
