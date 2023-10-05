@@ -1,0 +1,4 @@
+[2023-10-05 07:06:44] | email: 123@123.123 | password: ******** | type: login | 
+[2023-10-05 07:07:16] | email: 123@123.123 | password: ******** | type: login | 
+[2023-10-05 07:07:23] | UserID: 5 | type: Checkout | fastshipping: false | 
+[2023-10-05 07:07:24] | UserID: 5 | orderid: 4 | type: Paid | orderID: 4 | 

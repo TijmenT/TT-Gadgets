@@ -4,8 +4,8 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 include("../dependencies/filter.php");
 include("../db.php");
+include("../dependencies/log.php");
 session_start();
-
 if (isset($_GET['type'])) {
     $type = $_GET['type'];
     if ($type == "register") {
@@ -20,6 +20,7 @@ if (isset($_GET['type'])) {
 }
 
 function Registation($mysqli){
+    logToFile();
     $firstname = customFilter($_POST['firstname'], 3, 20, "str", true, false, false);
     $lastname = customFilter($_POST['lastname'], 3, 20, "str", true, false, false);
     $email = customFilter($_POST['email'], 4, 40, "str", false, false, true);
@@ -28,6 +29,7 @@ function Registation($mysqli){
     $street = customFilter($_POST['streetandnumber'], 3, 40, "str", true, false, false);
     $zipcode = customFilter($_POST['zipcode'], 3, 40, "str", false, false, false);
     $city = customFilter($_POST['city'], 2, 40, "str", false, false, false);
+
     if($temppassword == $temppassword2)
     {
         $password = password_hash($temppassword, PASSWORD_DEFAULT);
@@ -54,6 +56,7 @@ function Registation($mysqli){
 }   
 
 function Login($mysqli){
+    logToFile();
     $email = customFilter($_POST['email'], 4, 40, "str", false, false, true);
     $password = customFilter($_POST['password'], 4, 40, "str", false, false, true);
     $query = "SELECT * FROM `customers` WHERE `email` = ?";

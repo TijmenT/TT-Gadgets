@@ -3,6 +3,8 @@
 include("../dependencies/functions.php");
 include("../db.php");
 include("cart_controller.php");
+include("../dependencies/log.php");
+
 session_start();
 
 if (isset($_GET['type'])) {
@@ -17,6 +19,7 @@ if (isset($_GET['type'])) {
     }
 }
 function ProcessOrder($mysqli, $fastshipping){
+    logToFile();
     if(!isset($_SESSION['cart'])){
         return header("Location: ../cart.php");
     }
@@ -104,6 +107,7 @@ function GetMyOrders($mysqli){
 }
 
 function PaidOrder($order_ID, $mysqli){
+    logToFile();
     $query = "UPDATE `orders` SET `paid` = 1 WHERE order_ID = ?";
     if ($stmt = $mysqli->prepare($query)) {
         $stmt->bind_param("s", $order_ID);
